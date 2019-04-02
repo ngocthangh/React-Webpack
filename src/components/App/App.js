@@ -6,6 +6,7 @@ import routes from '../../routes';
 
 class App extends Component {
     render() {
+        console.log('app component')
         return (
 
             <HashRouter>
