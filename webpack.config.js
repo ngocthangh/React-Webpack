@@ -1,5 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const VENDOR_LIBS = [
     "axios",
     "bootstrap",
@@ -20,7 +22,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js'
+        filename: '[name].[chunkhash].js'
     },
     module: {
         rules: [
@@ -45,6 +47,12 @@ module.exports = {
             'jQuery': 'jquery',
             'window.$': 'jquery',
             'window.jQuery': 'jquery'
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor', 'manifest']
+        }),
+        new HtmlWebpackPlugin({
+            template: 'src/index.html'
         })
     ]
 
